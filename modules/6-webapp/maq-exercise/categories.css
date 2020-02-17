@@ -8,15 +8,23 @@
 
 .categories__list {
   display: flex;
+
+  width: 100%;
 }
 
 .categories__list__items {
   display: flex;
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
 }
 
 .categories__list__items li {
+  margin-right: var(--m);
+  padding: var(--m);
   list-style: none;
   display: flex;
+  flex: none;
+  scroll-snap-align: center;
   transition: 0.25s ease-in-out transform, 0.25s ease-in-out box-shadow;
 }
 
