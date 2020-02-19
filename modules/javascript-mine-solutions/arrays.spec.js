@@ -18,7 +18,7 @@ describe('arrays', () => {
   it('should add all the numbers', () => {
     const given = [1, 2, 3]
 
-    const actual = given.reduce((a, b) => a + b)
+    const actual = given.reduce((sum, number) => sum + number, 0)
 
     expect(actual).toBe(6)
   })
@@ -26,7 +26,7 @@ describe('arrays', () => {
   it('should sort alphabetically', () => {
     const given = ['javascript', 'java', 'python', 'lua']
 
-    const actual = given.sort()
+    const actual = given.sort((a, b) => a.localeCompare(b))
 
     expect(actual).toEqual(['java', 'javascript', 'lua', 'python'])
   })
@@ -60,6 +60,11 @@ describe('arrays', () => {
       .filter(x => !vowels.includes(x))
       .join('')
 
+    const actual = word
+      .split('')
+      .filter(x => !['a', 'e', 'i', 'o', 'u'].includes(x))
+      .join('')
+
     expect(actual).toBe('hll wrld')
   })
 
@@ -70,7 +75,7 @@ describe('arrays', () => {
       if (acc[currentValue] === undefined) {
         acc[currentValue] = 1
       } else {
-        acc[currentValue] = acc[currentValue] + 1
+        acc[currentValue]++
       }
       return acc
     }, {})
@@ -174,5 +179,68 @@ describe('arrays', () => {
     }, 0)
 
     expect(actual).toBe(7)
+  })
+
+  it('should remove all the keys of an object whose keys start with a', () => {
+    const given = {
+      a: 1,
+      ba: 2,
+      aa: 3,
+      ab: 4
+    }
+
+    expect(actual).toEqual({ ba: 2 })
+  })
+
+  it('should copy an object with a key of the object added dynamically when a random number is greater than 0.5 without mutating the object', () => {
+    const given = {
+      foo: 1,
+      dynamicProp: 2
+    }
+    const randomNumber = 0.5
+
+    expect(actual).toEqual({ foo: 1 })
+  })
+
+  it('should copy an object with a key of the object added dynamically when a random number is greater than 0.5 without mutating the object part 2', () => {
+    const given = {
+      foo: 1,
+      dynamicProp: 2
+    }
+    const randomNumber = 0.3
+
+    expect(actual).toEqual({ foo: 1, dynamicProp: 0.3 })
+  })
+
+  it('should map properties that start with message into an object', () => {
+    const given = [
+      {
+        status: 409,
+        messageName: 'El nombre de usuario ya existe',
+        ok: false
+      },
+      {
+        status: 409,
+        messageEmail: 'El email no es correcto',
+        ok: false
+      },
+      {
+        status: 409,
+        messagePassword: 'Las contraseñas no coinciden',
+        ok: false
+      }
+    ]
+
+    const actual = Object.fromEntries(
+      given.flatMap(x => {
+        return Object.entries(x).filter(([key]) => key.startsWith('message'))
+      })
+    )
+
+    expect(actual).toEqual({
+      messageName: 'El nombre de usuario ya existe',
+      messageEmail: 'El email no es correcto',
+      messagePassword: 'Las contraseñas no coinciden'
+    })
   })
 })
