@@ -4,7 +4,7 @@ describe('map', () => {
 
     map.set('foo', 'bar')
 
-    expect(map.size).toBe(1)
+    expect(map).toEqual(new Map([['foo', 'bar']]))
   })
 
   it('should set some value and get it', () => {
@@ -17,65 +17,71 @@ describe('map', () => {
   })
 
   it('should tell me the size', () => {
-    const map = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
-    ])
+    const map = new Map()
 
-    expect(map.size).toBe(2)
+    map.set('foo', 'bar')
+    map.set('bar', 'baz')
+    const actual = map.size
+
+    expect(actual).toBe(2)
   })
 
   it('should check that it has some value', () => {
-    const map = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
-    ])
+    const map = new Map()
 
-    expect(map.has('buzz')).toBe(false)
+    map.set('foo', 'bar')
+    const actual = map.has('foo')
+
+    expect(actual).toBe(true)
   })
 
   it('should check that it has some value after deleting a value', () => {
-    const map = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
-    ])
+    const map = new Map()
 
-    map.delete('key')
+    map.set('foo', 'bar')
+    map.delete('foo')
+    const actual = map.has('foo')
 
-    expect(map.has('key')).toBe(false)
+    expect(actual).toBe(false)
   })
 
   it('should delete all values', () => {
-    const map = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
-    ])
+    const map = new Map()
 
+    map.set('foo', 'bar')
+    map.set('bar', 'baz')
     map.clear()
 
-    expect(map.size).toEqual(0)
+    const foo = map.has('foo')
+    expect(foo).toBe(false)
+    const bar = map.has('bar')
+    expect(bar).toBe(false)
   })
 
   it('should execute a callback for each value', () => {
-    const myMap = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
+    const map = new Map()
+    const calls = []
+
+    map.set('foo', 'bar')
+    map.set('bar', 'baz')
+    map.forEach((value, key) => calls.push({ value, key }))
+
+    expect(calls).toEqual([
+      { key: 'foo', value: 'bar' },
+      { key: 'bar', value: 'baz' }
     ])
-    const callback = jest.fn()
-
-    myMap.forEach(callback)
-
-    expect(callback).toBeCalledTimes(2)
   })
 
   it('should be transformed to an array', () => {
-    const map = new Map([
-      ['foo', 'bar'],
-      ['key', 'value']
-    ])
-    const actual = Array.from(map)
-    expect(actual).toBeInstanceOf(Array)
-  })
+    const map = new Map()
 
-  it('should be iterated with a for loop', () => {})
+    map.set('foo', 'bar')
+    map.set('bar', 'baz')
+    const actual = Array.from(map)
+
+    expect(actual).toEqual([
+      ['foo', 'bar'],
+      ['bar', 'baz']
+    ])
+  })
 })
