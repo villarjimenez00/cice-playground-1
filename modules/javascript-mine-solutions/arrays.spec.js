@@ -66,6 +66,15 @@ describe('arrays', () => {
   it('should return a count of all repeated elements', () => {
     const given = ['🍋', '🍉', '🍒', '🍋', '🍋', '🍎', '🍎', '🍐']
 
+    const actual = given.reduce((acc, currentValue) => {
+      if (acc[currentValue] === undefined) {
+        acc[currentValue] = 1
+      } else {
+        acc[currentValue] = acc[currentValue] + 1
+      }
+      return acc
+    }, {})
+
     expect(actual).toEqual({
       '🍋': 3,
       '🍉': 1,
@@ -81,6 +90,15 @@ describe('arrays', () => {
       { name: 'Max', age: 20 },
       { name: 'Jane', age: 20 }
     ]
+
+    const actual = given.reduce((acc, currentValue) => {
+      if (acc[currentValue.age] === undefined) {
+        acc[currentValue.age] = [currentValue]
+      } else {
+        acc[currentValue.age] = [...acc[currentValue.age], currentValue]
+      }
+      return acc
+    }, {})
 
     expect(actual).toEqual({
       20: [
@@ -110,6 +128,15 @@ describe('arrays', () => {
       }
     ]
 
+    const actual = Array.from(
+      new Set(
+        given.reduce((acc, currentValue) => {
+          acc = [...acc, ...currentValue.books]
+          return acc
+        }, [])
+      )
+    )
+
     expect(actual).toEqual([
       'Dune',
       'Harry Potter',
@@ -120,14 +147,31 @@ describe('arrays', () => {
     ])
   })
 
-  it('should make sure every element of the array is positive', () => {
+  it.only('should make sure every element of the array is positive', () => {
     const given = [1, -2, -5, 9]
+
+    const negativeItems = given.filter(x => {
+      if (x < 0) {
+        return x
+      }
+    })
+
+    const actual = negativeItems.length > 0 ? false : true
 
     expect(actual).toBe(false)
   })
 
   it('should add the length of all sub arrays', () => {
     const given = [1, [2, 3], [4, 5], [6, 7]]
+
+    const actual = given.reduce((acc, currentValue) => {
+      if (currentValue.length === undefined) {
+        acc++
+      } else {
+        acc += currentValue.length
+      }
+      return acc
+    }, 0)
 
     expect(actual).toBe(7)
   })
