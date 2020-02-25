@@ -60,11 +60,6 @@ describe('arrays', () => {
       .filter(x => !vowels.includes(x))
       .join('')
 
-    const actual = word
-      .split('')
-      .filter(x => !['a', 'e', 'i', 'o', 'u'].includes(x))
-      .join('')
-
     expect(actual).toBe('hll wrld')
   })
 
@@ -97,10 +92,11 @@ describe('arrays', () => {
     ]
 
     const actual = given.reduce((acc, currentValue) => {
-      if (acc[currentValue.age] === undefined) {
-        acc[currentValue.age] = [currentValue]
+      const age = currentValue.age
+      if (acc[age] === undefined) {
+        acc[age] = [currentValue]
       } else {
-        acc[currentValue.age] = [...acc[currentValue.age], currentValue]
+        acc[age] = [...acc[age], currentValue]
       }
       return acc
     }, {})
@@ -152,16 +148,10 @@ describe('arrays', () => {
     ])
   })
 
-  it.only('should make sure every element of the array is positive', () => {
+  it('should make sure every element of the array is positive', () => {
     const given = [1, -2, -5, 9]
 
-    const negativeItems = given.filter(x => {
-      if (x < 0) {
-        return x
-      }
-    })
-
-    const actual = negativeItems.length > 0 ? false : true
+    const actual = given.filter(x => (x < 0 ? x : false)).length > 0 ? false : true
 
     expect(actual).toBe(false)
   })
@@ -169,14 +159,11 @@ describe('arrays', () => {
   it('should add the length of all sub arrays', () => {
     const given = [1, [2, 3], [4, 5], [6, 7]]
 
-    const actual = given.reduce((acc, currentValue) => {
-      if (currentValue.length === undefined) {
-        acc++
-      } else {
-        acc += currentValue.length
-      }
-      return acc
-    }, 0)
+    const actual = given.reduce(
+      (acc, currentValue) =>
+        currentValue.length === undefined ? (acc = acc + 1) : (acc += currentValue.length),
+      0
+    )
 
     expect(actual).toBe(7)
   })
@@ -189,15 +176,25 @@ describe('arrays', () => {
       ab: 4
     }
 
+    for (const item in given) {
+      if (item.startsWith('a')) {
+        delete given[item]
+      }
+    }
+
+    const actual = given
+
     expect(actual).toEqual({ ba: 2 })
   })
 
-  it('should copy an object with a key of the object added dynamically when a random number is greater than 0.5 without mutating the object', () => {
+  it.only('should copy an object with a key of the object added dynamically when a random number is greater than 0.5 without mutating the object', () => {
     const given = {
       foo: 1,
       dynamicProp: 2
     }
     const randomNumber = 0.5
+
+    const actual = { ...given }
 
     expect(actual).toEqual({ foo: 1 })
   })
