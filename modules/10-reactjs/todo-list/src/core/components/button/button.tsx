@@ -13,10 +13,10 @@ interface Props {
 
 export const Button: React.FunctionComponent<Props> = ({
   children,
-  onClick,
-  theme,
   className,
-  submit = false
+  theme,
+  submit,
+  onClick
 }) => {
   return (
     <button
