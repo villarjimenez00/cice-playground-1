@@ -1,4 +1,4 @@
-import './styles/reset.css'
-import './styles/theme.css'
-import './styles/typography.css'
-import './styles/index.css'
+import '../src/styles/reset.css'
+import '../src/styles/theme.css'
+import '../src/styles/typography.css'
+import '../src/styles/index.css'
