@@ -1,10 +1,9 @@
-import React, { FunctionComponent } from 'react'
-
+import React from 'react'
 import { bind } from '../../../utils/bind'
 import styles from './page.module.css'
 
 const cx = bind(styles)
 
-export const Page: FunctionComponent<{}> = ({ children }) => {
-  return <div className={cx('container')}>{children}</div>
+export const Page: React.FunctionComponent<{}> = ({ children }) => {
+  return <main className={cx('page')}>{children}</main>
 }

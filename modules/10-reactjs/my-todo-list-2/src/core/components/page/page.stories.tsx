@@ -6,8 +6,10 @@ export default {
   component: Page
 }
 
-export const myPage = () => (
+export const base = () => (
   <Page>
-    <h1>Page working</h1>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero minus vitae voluptates? Ducimus
+    laboriosam necessitatibus repellendus. Accusamus, consectetur consequuntur corporis est iusto
+    quaerat quibusdam quod! Aspernatur est nostrum odio quibusdam.
   </Page>
 )

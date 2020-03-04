@@ -6,4 +6,4 @@ export default {
   component: Card
 }
 
-export const myCard = () => <Card>Card</Card>
+export const base = () => <Card>Click me</Card>
