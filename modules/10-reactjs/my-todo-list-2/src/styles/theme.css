@@ -1,12 +1,14 @@
 :root {
   /* Palette */
-  --primary-color: peachpuff;
+  --primary-color: blue;
   --on-primary-color: indianred;
 
   --secondary-color: rebeccapurple;
   --on-secondary-color: white;
 
   --gray-color: gray;
+  --soft-gray-color: #ccc;
+  --danger-color: red;
 
   /* Typography */
   --body-font: 'Open sans';

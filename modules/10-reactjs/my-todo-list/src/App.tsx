@@ -16,7 +16,7 @@ function App() {
 
   const list = todos.map(todo => (
     <li
-      className={cx({ completed: todo.completed })}
+      className={ completed: todo.completed })}
       key={todo.id}
       onClick={() => completeTodo(todo.id)}
     >
