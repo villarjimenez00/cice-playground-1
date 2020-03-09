@@ -1,30 +1,35 @@
-/**
- * @param {string} string
- * @returns {number}
- */
-export function calculator(string) {
-  let result = string.split(' ')
-  result.map(char => {
-    if (!parseInt(char)) {
-      return char
-    }
-    return parseInt(char)
-  })
+export class Calculator {
+  /**
+   *
+   * @param {string} string
+   * @returns {number}
+   */
+  calculate(string) {
+    const cleanString = string.replace(/ /g, '')
+    const sequence = this.#getSequence(cleanString)
+    const numbers = sequence.map(Number)
+    return numbers.reduce((result, value) => result + value, 0)
+  }
 
-  let operador
-  result.reduce((a, b, c) => {
-    if ((c + 1) % 2 != 0) {
-      operador = b
-      return a
-    } else {
-      switch (operador) {
-        case '+':
-          return a + b
-          break
-        case '-':
-          return a - b
-          break
+  /**
+   *
+   * @param {string} string
+   * @returns {string[]}
+   */
+  #getSequence(string) {
+    let signedStringifiedNumber = ''
+    const sequence = []
+
+    for (let char of string) {
+      const isSignFound = ['+', '-'].includes(char)
+      if (isSignFound) {
+        sequence.push(signedStringifiedNumber)
+        signedStringifiedNumber = ''
       }
+      signedStringifiedNumber += char
     }
-  })
+
+    sequence.push(signedStringifiedNumber)
+    return sequence
+  }
 }
