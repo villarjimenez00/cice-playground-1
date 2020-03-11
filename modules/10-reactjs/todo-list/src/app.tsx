@@ -9,6 +9,18 @@ export function App() {
 
   function createTodo(todoText: string) {
     const newTodo = { id: Math.random() * 1000, text: todoText, completed: false }
+
+    console.log('before forE ->' + newTodo.text)
+
+    const forTestTodos = Object.entries(todos)
+    forTestTodos.forEach(([key, value]) => {
+      if (value.text === newTodo.text) {
+        console.log('repe')
+      } else {
+        console.log('NO repe')
+      }
+    })
+
     setTodos([...todos, newTodo])
   }
 
