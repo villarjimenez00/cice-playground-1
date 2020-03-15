@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './app.module.css'
 import { bind } from './bind'
 import { usePosition } from './usePosition'
-import MyMap from './mymap'
+import MyMap from './components/mymap/mymap'
 const cx = bind(styles)
 
 export function App() {
