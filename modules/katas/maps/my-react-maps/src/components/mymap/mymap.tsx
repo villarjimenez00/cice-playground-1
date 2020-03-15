@@ -2,6 +2,7 @@ import React from 'react'
 import { Map, TileLayer } from 'react-leaflet'
 import { LatLngTuple } from 'leaflet'
 import styles from './mymap.module.css'
+import { usePosition } from '../../customhooks/usePosition'
 
 import { bind } from '../../bind'
 const cx = bind(styles)
@@ -11,10 +12,12 @@ const cx = bind(styles)
  * longitude: -3.6631075,17
  */
 
-const defaultLatLng: LatLngTuple = [40.3914663, -3.6631075]
-const zoom: number = 16
-
 const MyMap: React.FC = () => {
+  const { latitude, longitude } = usePosition()
+
+  //Llamadas a customHook siempre dentro de un React.Component
+  const defaultLatLng: LatLngTuple = [latitude, longitude]
+  const zoom: number = 16
   return (
     <Map id="mapId" className={cx('my-map')} center={defaultLatLng} zoom={zoom}>
       zoom={zoom}>
