@@ -5,17 +5,18 @@ import { bind } from '../../bind'
 const cx = bind(styles)
 
 export default function LatLngInfo() {
-  const { latitude, longitude, error } = usePosition()
+  const { latitude, longitude, error, isLoading } = usePosition()
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+  if (error) {
+    return <p>{error}</p>
+  }
   return (
     <div className={cx('latlngdata')}>
-      {latitude === 0 && longitude === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <code>
-          {' '}
-          latitude: {latitude} <br /> longitude: {longitude} <br /> {error}{' '}
-        </code>
-      )}{' '}
+      <code>
+        latitude: {latitude} <br /> longitude: {longitude}
+      </code>
     </div>
   )
 }
