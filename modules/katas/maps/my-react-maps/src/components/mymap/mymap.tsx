@@ -8,9 +8,9 @@ import { bind } from '../../bind'
 const cx = bind(styles)
 
 const MyMap: React.FC = () => {
+  //Llamadas a customHook siempre dentro de un React.Component
   const { latitude, longitude } = usePosition()
 
-  //Llamadas a customHook siempre dentro de un React.Component
   const currentLatLng: LatLngTuple = [latitude, longitude]
   const zoom: number = 16
   return (
