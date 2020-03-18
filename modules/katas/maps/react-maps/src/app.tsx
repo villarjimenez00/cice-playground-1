@@ -11,6 +11,35 @@ interface Coordinates {
   latitude: number
 }
 
+const throttle = (func: any, limit: any) => {
+  let inThrottle: any
+  return function() {
+    const args = arguments
+    // @ts-ignore
+    const context = this
+    if (!inThrottle) {
+      func.apply(context, args)
+      inThrottle = true
+      setTimeout(() => (inThrottle = false), limit)
+    }
+  }
+}
+
+function useHeight() {
+  const [height, setHeight] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(window.innerHeight)
+    }
+    window.addEventListener('resize', throttle(handleResize, 100))
+
+    return () => window.removeEventListener('resize', throttle(handleResize, 100))
+  }, [])
+
+  return { height, heightInPx: height + 'px' }
+}
+
 function useGeoposition() {
   const [coordinates, setCoordinates] = useState<Coordinates>({ longitude: 0, latitude: 0 })
   const [status, setStatus] = useState<Status>('loading')
@@ -61,10 +90,9 @@ export function App() {
     )
   }
 
-  // Early return || Guard Clause
-
+  const { heightInPx } = useHeight()
   return (
-    <div className={cx('app')}>
+    <div className={cx('app')} style={{ '--map-height': heightInPx } as React.CSSProperties}>
       <main>{getMap()}</main>
       <footer>
         <button onClick={() => setCityCoordinates({ latitude: 51.507351, longitude: -0.127758 })}>
