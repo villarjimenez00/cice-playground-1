@@ -1,19 +1,18 @@
 import React, { Suspense, lazy } from 'react'
-import './app.css'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import './App.css'
 import { Header } from './header'
 
-//import dinamico
 const UserDetail = lazy(() => import('./user-detail-page'))
 
 export const App: React.FC = () => {
   return (
     <Router>
       <Header />
-      <Suspense fallback={<h1>Loading</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           <Route path="/" exact>
-            <h1>Home</h1>
+            <h1>HOME</h1>
           </Route>
 
           <Route path="/users" exact>
