@@ -1,35 +1,37 @@
 import React, { useReducer } from 'react'
 
+type Action =
+  | { type: 'started' }
+  | { type: 'ended' }
+  | { type: 'success'; result: number }
+  | { type: 'error'; error: Error }
+
 interface State {
   status: 'pending' | 'error' | 'success' | 'idle'
   error: Error | null
-  result: number
+  number: number
 }
 
-export type Action =
-  | { type: 'fetch'; result: number }
-  | { type: 'error'; error: Error }
-  | { type: 'started' }
-  | { type: 'ended' }
-
-const stateReducer = (state: State, action: Action): State => {
+function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'error':
-      return {
-        status: 'error',
-        result: 0,
-        error: action.error
-      }
-    case 'fetch':
-      return {
-        status: 'success',
-        error: null,
-        result: action.result
-      }
     case 'started':
       return {
         ...state,
-        status: 'pending'
+        status: 'pending',
+        error: null
+      }
+    case 'success':
+      return {
+        ...state,
+        status: 'success',
+        number: state.number + action.result
+      }
+    case 'error':
+      return {
+        ...state,
+        status: 'error',
+        number: 0,
+        error: action.error
       }
     case 'ended':
       return {
@@ -39,14 +41,14 @@ const stateReducer = (state: State, action: Action): State => {
   }
 }
 
-export const UseReducerRefactor: React.FC = () => {
-  const [state, dispatch] = useReducer(stateReducer, { result: 0, error: null, status: 'idle' })
+export const UseReducerRefactor2: React.FC = () => {
+  const [state, dispatch] = useReducer(reducer, { number: 0, error: null, status: 'idle' })
 
   const getNumber = async () => {
     return new Promise<number>((resolve, reject) => {
       setTimeout(() => {
         const number = Math.floor(Math.random() * 100)
-        if (number > 50) {
+        if (number > 80) {
           reject(new Error('There was an error'))
         }
         resolve(number)
@@ -57,9 +59,9 @@ export const UseReducerRefactor: React.FC = () => {
   const handleClick = async () => {
     try {
       dispatch({ type: 'started' })
-      dispatch({ type: 'fetch', result: await getNumber() })
+      dispatch({ type: 'success', result: await getNumber() })
     } catch (e) {
-      dispatch({ type: 'error', error: new Error('an error occurred') })
+      dispatch({ type: 'error', error: e })
     } finally {
       dispatch({ type: 'ended' })
     }
@@ -72,7 +74,7 @@ export const UseReducerRefactor: React.FC = () => {
   return (
     <div>
       {state.error !== null && <p>{state.error.message}</p>}
-      <button onClick={handleClick}>{state.result}</button>
+      <button onClick={handleClick}>{state.number}</button>
     </div>
   )
 }
