@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import './App.css'
 import { Header } from './header'
 
+//solo acepta import dinamicos archivos con un export default (ver user-detail-page.tsx)
 const UserDetail = lazy(() => import('./user-detail-page'))
 
 export const App: React.FC = () => {
