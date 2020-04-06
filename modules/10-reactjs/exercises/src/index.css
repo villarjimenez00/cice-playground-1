@@ -9,3 +9,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+.grafico {
+  width: 250px;
+  height: 250px;
+  background: conic-gradient(#ff5722 0% 35%, #ffeb3b 35% 60%, #2196f3 60% 100%);
+  border-radius: 50%;
+}
