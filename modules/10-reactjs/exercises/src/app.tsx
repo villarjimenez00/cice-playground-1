@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Link, Route } from 'react-router-dom'
 import { ExerciseOne } from './exercise-one'
 import { MyExerciseOne } from './my-exercise-one'
 import { MyExerciseTwo } from './my-exercise-two'
@@ -16,6 +16,16 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Link to="/exercise-one">Exercise one</Link>
+      <Link to="/exercise-two">Exercise two</Link>
+      <Link to="/exercise-three">Exercise three</Link>
+      <Link to="/exercise-four">Exercise four</Link>
+      <Link to="/exercise-five">Exercise five</Link>
+      <Link to="/exercise-six">Exercise six</Link>
+      <Link to="/exercise-seven">Exercise seven</Link>
+      <Link to="/exercise-eight">Exercise eight</Link>
+      <Link to="/exercise-nine">Exercise nine</Link>
+      <Link to="/exercise-ten">Exercise ten</Link>
+      <Link to="/exercise-eleven">Exercise eleven</Link>
 
       <Link to="/my-exercise-one">My Exercise one</Link>
 
