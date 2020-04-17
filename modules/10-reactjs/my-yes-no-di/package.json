@@ -1,5 +1,5 @@
 {
-  "name": "react-parcel",
+  "name": "yes-no-di",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,9 +19,8 @@
     "typescript": "3.8.3"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "test:watch": "jest --watch",
+    "start": "parcel ./index.html",
+    "build": "parcel build ./index.html",
     "test": "jest"
   },
   "browserslist": {
