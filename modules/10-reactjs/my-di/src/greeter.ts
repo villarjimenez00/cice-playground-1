@@ -1,8 +1,3 @@
-import { injectable } from 'inversify'
-
-@injectable()
-export class Greeter {
-  hello(): string {
-    return 'Hola'
-  }
+export interface Greeter {
+  hello(): string
 }
