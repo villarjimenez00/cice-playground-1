@@ -47,6 +47,6 @@
     "parcel-bundler": "1.12.4",
     "prettier": "2.0.4",
     "react-test-renderer": "16.13.1",
-    "ts-mockito": "2.5.0"
+    "ts-mockito": "^2.5.0"
   }
 }
