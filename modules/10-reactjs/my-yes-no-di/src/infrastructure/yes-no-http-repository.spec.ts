@@ -1,44 +1,49 @@
 import { YesNoHttpRepository } from './yes-no-http-repository'
+import { deepEqual, instance, mock, verify, when } from 'ts-mockito'
 import { Http } from './http'
-import { mock, when, instance, anyString } from 'ts-mockito'
 import { YesNoDtoToYesNoMapper } from './yes-no-dto-to-yes-no-mapper'
-import { YesNoDto } from './yes-no-dto'
-import { verify } from 'crypto'
-import { YesNo } from '../domain/yes-no'
+import { YesNoMother } from './yes-no-mother'
 
-describe('yesno http repository', () => {
+describe('YesNoHttpRepository', () => {
   it('should call http', async () => {
-    const http: Http = mock(Http)
-    const yesNoDtoToYesNoMapper: YesNoDtoToYesNoMapper = mock(YesNoDtoToYesNoMapper)
-    const yesNoHttpRepository = new YesNoHttpRepository(
-      instance(http),
-      instance(yesNoDtoToYesNoMapper)
-    )
+    const { http, yesNoHttpRepository } = setup()
 
     await yesNoHttpRepository.find()
 
-    verify(http.get(anyString())).called()
+    verify(http.get('https://yesno.wtf/api/')).once()
   })
 
-  it('should return YesNo mapped result', async () => {
-    const http: Http = mock(Http)
-    const yesNoDtoToYesNoMapper: YesNoDtoToYesNoMapper = mock(YesNoDtoToYesNoMapper)
-    const yesNoDto: YesNoDto = {
-      answer: 'yes',
-      forced: false,
-      image: 'img_url',
-    }
-    const yesNo: YesNo = { answer: 'yes', image: 'imageUrl' }
-    when(http.get(anyString())).thenResolve(yesNoDto)
-    when(yesNoDtoToYesNoMapper.map(yesNoDto)).thenReturn(yesNo)
+  it('should use mapper', async () => {
+    const { yesNoDtoToYesNoMapper, http, yesNoHttpRepository } = setup()
+    when(http.get('https://yesno.wtf/api/')).thenResolve(YesNoMother.yesDto())
 
-    const yesNoHttpRepository = new YesNoHttpRepository(
-      instance(http),
-      instance(yesNoDtoToYesNoMapper)
-    )
+    await yesNoHttpRepository.find()
+
+    verify(yesNoDtoToYesNoMapper.map(deepEqual(YesNoMother.yesDto()))).once()
+  })
+
+  it('should return a yes no entity', async () => {
+    const { yesNoDtoToYesNoMapper, http, yesNoHttpRepository } = setup()
+    when(http.get('https://yesno.wtf/api/')).thenResolve(YesNoMother.yesDto())
+    when(yesNoDtoToYesNoMapper.map(deepEqual(YesNoMother.yesDto()))).thenReturn(YesNoMother.yes())
 
     const actual = await yesNoHttpRepository.find()
 
-    expect(actual).toBe(yesNo)
+    expect(actual).toEqual(YesNoMother.yes())
   })
 })
+
+function setup() {
+  const http = mock(Http)
+  const yesNoDtoToYesNoMapper = mock(YesNoDtoToYesNoMapper)
+  const yesNoHttpRepository = new YesNoHttpRepository(
+    instance(http),
+    instance(yesNoDtoToYesNoMapper)
+  )
+
+  return {
+    http,
+    yesNoDtoToYesNoMapper,
+    yesNoHttpRepository,
+  }
+}

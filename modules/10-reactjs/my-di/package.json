@@ -21,7 +21,7 @@
   "scripts": {
     "start": "parcel ./index.html",
     "build": "parcel build ./index.html",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "browserslist": {
     "production": [
@@ -43,7 +43,7 @@
     "@babel/preset-typescript": "7.9.0",
     "@types/classnames": "2.2.10",
     "babel-jest": "25.3.0",
-    "jest": "25.3.0",
+    "jest": "^25.3.0",
     "parcel-bundler": "1.12.4",
     "prettier": "2.0.4",
     "react-test-renderer": "16.13.1"
