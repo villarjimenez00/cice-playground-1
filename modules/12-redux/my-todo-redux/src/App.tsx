@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import logo from './logo.svg'
 import './App.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
+import { store } from './store'
+import { TodoApp } from './todo-app'
 
 const App: React.FC = () => {
-  const [value, setValue] = useState('')
   return (
-    <>
-      <h1>Todos</h1>
-      <label>
-        Todo
-        <input value={value} onChange={(event) => setValue(event.target.value)} />
-      </label>
-      <button>Create todo</button>
-    </>
+    <Provider store={store}>
+      {' '}
+      <TodoApp />
+    </Provider>
   )
 }
 
