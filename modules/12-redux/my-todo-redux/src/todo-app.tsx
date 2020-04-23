@@ -41,7 +41,6 @@ export const TodoApp: React.FC = () => {
             <span
               onClick={() => {
                 dispatch(completeTodo(todo.id))
-                console.log('onClick')
               }}
             >
               {todo.text}
