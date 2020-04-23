@@ -16,6 +16,9 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
         return todo
       })
       return updatedTodos
+    case 'DELETE_TODO':
+      const afterDeleleTodos = todos.filter((todo) => todo.id !== action.payload.id)
+      return afterDeleleTodos
     default:
       return todos
   }

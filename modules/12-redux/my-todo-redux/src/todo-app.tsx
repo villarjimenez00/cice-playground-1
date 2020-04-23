@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { createTodo, completeTodo } from './action-creators'
+import { createTodo, completeTodo, deleteTodo } from './action-creators'
 import { AppDispatch, RootState } from './store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +16,7 @@ export const TodoApp: React.FC = () => {
   const todos = useSelector(todoSelector)
   const dispatch: AppDispatch = useDispatch()
   const [value, setValue] = useState('')
-  const id = Math.random()
+  const id = Math.random() * 1000
 
   const clearTodo = () => setValue('')
 
@@ -48,7 +48,7 @@ export const TodoApp: React.FC = () => {
             <span>
               <FontAwesomeIcon icon={faEdit} />
             </span>
-            <span>
+            <span onClick={() => dispatch(deleteTodo(todo.id))}>
               <FontAwesomeIcon icon={faTrashAlt} />
             </span>
           </li>

@@ -1,4 +1,4 @@
-import { CREATE_TODO, COMPLETE_TODO } from './action-types'
+import { CREATE_TODO, COMPLETE_TODO, DELETE_TODO } from './action-types'
 
 export function createTodo(id: number, todoText: string): Action {
   return {
@@ -20,6 +20,22 @@ export function completeTodo(id: number): Action {
   }
 }
 
+export function deleteTodo(id: number): Action {
+  return {
+    type: DELETE_TODO,
+    payload: {
+      id: id,
+    },
+  }
+}
+
+interface DeleteTodo {
+  type: typeof DELETE_TODO
+  payload: {
+    id: number
+  }
+}
+
 interface CreateTodo {
   type: typeof CREATE_TODO
   payload: {
@@ -36,4 +52,4 @@ interface CompleteTodo {
   }
 }
 
-export type Action = CreateTodo | CompleteTodo
+export type Action = CreateTodo | CompleteTodo | DeleteTodo
