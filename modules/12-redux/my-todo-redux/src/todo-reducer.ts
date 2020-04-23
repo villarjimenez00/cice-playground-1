@@ -10,7 +10,7 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
       ]
 
     case 'COMPLETE_TODO':
-      const updatedTodos = todos.map((todo) => {
+      const updatedTodos: TodoState[] = todos.map((todo) => {
         if (todo.id === action.payload.id) {
           return {
             ...todo,
@@ -22,11 +22,11 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
       return updatedTodos
 
     case 'DELETE_TODO':
-      const afterDeleleTodos = todos.filter((todo) => todo.id !== action.payload.id)
+      const afterDeleleTodos: TodoState[] = todos.filter((todo) => todo.id !== action.payload.id)
       return afterDeleleTodos
 
     case 'VIEW_COMPLETED_TODOS':
-      const completedTodos = todos.map((todo) => {
+      const completedTodos: TodoState[] = todos.map((todo) => {
         if (todo.completed === false) {
           return {
             ...todo,
@@ -42,7 +42,7 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
       return completedTodos
 
     case 'VIEW_INCOMPLETED_TODOS':
-      const incompletedTodos = todos.map((todo) => {
+      const incompletedTodos: TodoState[] = todos.map((todo) => {
         if (todo.completed === true) {
           return {
             ...todo,
@@ -58,7 +58,7 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
       return incompletedTodos
 
     case 'VIEW_ALL_TODOS':
-      const allTodos = todos.map((todo) => {
+      const allTodos: TodoState[] = todos.map((todo) => {
         return {
           ...todo,
           vissible: true,
