@@ -1,0 +1,12 @@
+.completed {
+  text-decoration: line-through;
+}
+
+.todoText span {
+  margin-right: 0.6rem;
+}
+
+.todoText {
+  cursor: pointer;
+  color: tomato;
+}
