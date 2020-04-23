@@ -1,4 +1,11 @@
-import { CREATE_TODO, COMPLETE_TODO, DELETE_TODO } from './action-types'
+import {
+  CREATE_TODO,
+  COMPLETE_TODO,
+  DELETE_TODO,
+  VIEW_ALL_TODOS,
+  VIEW_COMPLETED_TODOS,
+  VIEW_INCOMPLETED_TODOS,
+} from './action-types'
 
 export function createTodo(id: number, todoText: string): Action {
   return {
@@ -29,6 +36,36 @@ export function deleteTodo(id: number): Action {
   }
 }
 
+export function viewAllTodos(): Action {
+  return {
+    type: VIEW_ALL_TODOS,
+  }
+}
+
+export function viewIncompletedTodos(): Action {
+  return {
+    type: VIEW_INCOMPLETED_TODOS,
+  }
+}
+
+export function viewCompletedTodos(): Action {
+  return {
+    type: VIEW_COMPLETED_TODOS,
+  }
+}
+
+interface ViewIncompletedodos {
+  type: typeof VIEW_INCOMPLETED_TODOS
+}
+
+interface ViewCompletedTodos {
+  type: typeof VIEW_COMPLETED_TODOS
+}
+
+interface ViewAllTodos {
+  type: typeof VIEW_ALL_TODOS
+}
+
 interface DeleteTodo {
   type: typeof DELETE_TODO
   payload: {
@@ -52,4 +89,10 @@ interface CompleteTodo {
   }
 }
 
-export type Action = CreateTodo | CompleteTodo | DeleteTodo
+export type Action =
+  | CreateTodo
+  | CompleteTodo
+  | DeleteTodo
+  | ViewAllTodos
+  | ViewCompletedTodos
+  | ViewIncompletedodos

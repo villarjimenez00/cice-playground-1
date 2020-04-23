@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
 import './App.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { createTodo, completeTodo, deleteTodo } from './action-creators'
+import {
+  createTodo,
+  completeTodo,
+  deleteTodo,
+  viewCompletedTodos,
+  viewAllTodos,
+  viewIncompletedTodos,
+} from './action-creators'
 import { AppDispatch, RootState } from './store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -35,24 +42,31 @@ export const TodoApp: React.FC = () => {
       >
         Create todo
       </button>
+      <button onClick={() => dispatch(viewAllTodos())}>Ver Todos</button>
+      <button onClick={() => dispatch(viewCompletedTodos())}>Ver Completados</button>
+      <button onClick={() => dispatch(viewIncompletedTodos())}>Ver No Completados</button>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className={cx('todoText', { completed: todo.completed })}>
-            <span
-              onClick={() => {
-                dispatch(completeTodo(todo.id))
-              }}
-            >
-              {todo.text}
-            </span>
-            <span>
-              <FontAwesomeIcon icon={faEdit} />
-            </span>
-            <span onClick={() => dispatch(deleteTodo(todo.id))}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </span>
-          </li>
-        ))}
+        {todos.map((todo) => {
+          if (todo.vissible === true) {
+            return (
+              <li key={todo.id} className={cx('todoText', { completed: todo.completed })}>
+                <span
+                  onClick={() => {
+                    dispatch(completeTodo(todo.id))
+                  }}
+                >
+                  {todo.text}
+                </span>
+                <span>
+                  <FontAwesomeIcon icon={faEdit} />
+                </span>
+                <span onClick={() => dispatch(deleteTodo(todo.id))}>
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </span>
+              </li>
+            )
+          }
+        })}
       </ul>
     </>
   )
