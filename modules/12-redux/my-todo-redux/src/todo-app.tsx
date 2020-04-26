@@ -23,6 +23,7 @@ export const TodoApp: React.FC = () => {
   const todos = useSelector(todoSelector)
   const dispatch: AppDispatch = useDispatch()
   const [value, setValue] = useState('')
+  const [editable, setEditable] = useState(false)
   const id = Math.random() * 1000
 
   const clearTodo = () => setValue('')
@@ -50,19 +51,26 @@ export const TodoApp: React.FC = () => {
           if (todo.vissible === true) {
             return (
               <li key={todo.id} className={cx('todoText', { completed: todo.completed })}>
-                <span
-                  onClick={() => {
-                    dispatch(completeTodo(todo.id))
-                  }}
-                >
-                  {todo.text}
-                </span>
-                <span>
-                  <FontAwesomeIcon icon={faEdit} />
-                </span>
-                <span onClick={() => dispatch(deleteTodo(todo.id))}>
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </span>
+                <p className={cx({ inputHidden: editable })}>
+                  <span
+                    onClick={() => {
+                      dispatch(completeTodo(todo.id))
+                    }}
+                  >
+                    {todo.text}
+                  </span>
+                  <span onClick={() => setEditable(true)}>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </span>
+                  <span onClick={() => dispatch(deleteTodo(todo.id))}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </span>
+                </p>
+                <input
+                  className={cx({ inputHidden: !editable })}
+                  value={value}
+                  onChange={(event) => setValue(event.target.value)}
+                />
               </li>
             )
           }
