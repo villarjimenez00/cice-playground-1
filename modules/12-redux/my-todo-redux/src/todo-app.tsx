@@ -8,10 +8,11 @@ import {
   viewCompletedTodos,
   viewAllTodos,
   viewIncompletedTodos,
-} from './action-creators'
+  editTodo,
+} from './todo-action-creators'
 import { AppDispatch, RootState } from './store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons'
 import styles from './todo-app.module.css'
 import { bind } from './utils/bind'
 
@@ -24,6 +25,7 @@ export const TodoApp: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
   const [value, setValue] = useState('')
   const [editable, setEditable] = useState(false)
+  const [updateText, setUpdateText] = useState('')
   const id = Math.random() * 1000
 
   const clearTodo = () => setValue('')
@@ -51,7 +53,7 @@ export const TodoApp: React.FC = () => {
           if (todo.vissible === true) {
             return (
               <li key={todo.id} className={cx('todoText', { completed: todo.completed })}>
-                <p className={cx({ inputHidden: editable })}>
+                <p>
                   <span
                     onClick={() => {
                       dispatch(completeTodo(todo.id))
@@ -59,18 +61,25 @@ export const TodoApp: React.FC = () => {
                   >
                     {todo.text}
                   </span>
-                  <span onClick={() => setEditable(true)}>
+                  <span onClick={() => setEditable(!editable)}>
                     <FontAwesomeIcon icon={faEdit} />
                   </span>
                   <span onClick={() => dispatch(deleteTodo(todo.id))}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                   </span>
                 </p>
-                <input
-                  className={cx({ inputHidden: !editable })}
-                  value={value}
-                  onChange={(event) => setValue(event.target.value)}
-                />
+                {editable && (
+                  <>
+                    <input
+                      type="text"
+                      onChange={(event) => setUpdateText(event.target.value)}
+                      value={updateText}
+                    />
+                    <button onClick={() => dispatch(editTodo(todo.id, updateText))}>
+                      <FontAwesomeIcon icon={faCheck} />
+                    </button>
+                  </>
+                )}
               </li>
             )
           }

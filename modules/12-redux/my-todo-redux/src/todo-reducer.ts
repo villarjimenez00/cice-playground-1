@@ -1,4 +1,4 @@
-import { createTodo, Action } from './action-creators'
+import { createTodo, Action } from './todo-action-creators'
 import { TodoState, initialTodoState } from './todo-state'
 
 export function todoReducer(todos: TodoState[] = initialTodoState, action: Action): TodoState[] {
@@ -24,6 +24,12 @@ export function todoReducer(todos: TodoState[] = initialTodoState, action: Actio
     case 'DELETE_TODO':
       const afterDeleleTodos: TodoState[] = todos.filter((todo) => todo.id !== action.payload.id)
       return afterDeleleTodos
+
+    case 'EDIT_TODO':
+      const updatedTextTodo: TodoState[] = todos.map((todo) =>
+        todo.id === action.payload.id ? { ...todo, text: action.payload.text } : todo
+      )
+      return updatedTextTodo
 
     case 'VIEW_COMPLETED_TODOS':
       const completedTodos: TodoState[] = todos.map((todo) => {

@@ -3,13 +3,24 @@ import {
   COMPLETE_TODO,
   DELETE_TODO,
   VIEW_ALL_TODOS,
+  EDIT_TODO,
   VIEW_COMPLETED_TODOS,
   VIEW_INCOMPLETED_TODOS,
-} from './action-types'
+} from './todo-action-types'
 
 export function createTodo(id: number, todoText: string): Action {
   return {
     type: CREATE_TODO,
+    payload: {
+      id: id,
+      text: todoText,
+    },
+  }
+}
+
+export function editTodo(id: number, todoText: string): Action {
+  return {
+    type: EDIT_TODO,
     payload: {
       id: id,
       text: todoText,
@@ -80,6 +91,13 @@ interface CreateTodo {
     text: string
   }
 }
+interface EditTodo {
+  type: typeof EDIT_TODO
+  payload: {
+    id: number
+    text: string
+  }
+}
 
 interface CompleteTodo {
   type: typeof COMPLETE_TODO
@@ -93,6 +111,7 @@ export type Action =
   | CreateTodo
   | CompleteTodo
   | DeleteTodo
+  | EditTodo
   | ViewAllTodos
   | ViewCompletedTodos
   | ViewIncompletedodos
