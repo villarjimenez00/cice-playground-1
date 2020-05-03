@@ -2,7 +2,7 @@ describe('arrays', () => {
   it('should obtain the power of 2 for a given number of elements', () => {
     const given = [1, 2, 3]
 
-    const actual = given.map(x => x ** 2)
+    const actual = given.map(x => Math.pow(x, 2))
 
     expect(actual).toEqual([1, 4, 9])
   })
@@ -54,6 +54,11 @@ describe('arrays', () => {
 
   it('should remove vowels from a word', () => {
     const word = 'hello world'
+    const vowels = ['a', 'e', 'i', 'o', 'u']
+    const actual = word
+      .split('')
+      .filter(x => !vowels.includes(x))
+      .join('')
 
     const actual = word
       .split('')

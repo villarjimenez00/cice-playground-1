@@ -1,0 +1,27 @@
+.input {
+  background-color: var(--soft-gray-color);
+  border: none;
+  border-bottom: var(--base) solid var(--gray-color);
+  padding: var(--m);
+}
+
+.input:focus {
+  border-bottom: var(--base) solid var(--primary-color);
+  outline: none;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--gray-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.required {
+  border-bottom: var(--base) solid var(--danger-color);
+}
+
+.error-msg {
+  color: var(--danger-color);
+  display: inline-block;
+}

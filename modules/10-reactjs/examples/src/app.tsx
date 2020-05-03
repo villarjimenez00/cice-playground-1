@@ -5,6 +5,7 @@ import { CustomHooks } from './custom-hooks'
 import { UseEffect } from './use-effect'
 import { UseReducer } from './use-reducer'
 import { UseReducerOriginal } from './use-reducer-original'
+import { MyUseReducerOriginal } from './my-use-reducer-original'
 import { UseStateImmutable } from './use-state-immutable'
 import { UseReducerWithOptions } from './use-reducer-with-options'
 import { UseReducerRefactor1 } from './use-reducer-refactor-1'
@@ -66,6 +67,9 @@ export function App() {
       </Route>
       <Route path="/use-reducer-original">
         <UseReducerOriginal />
+      </Route>
+      <Route path="/my-use-reducer-original">
+        <MyUseReducerOriginal />
       </Route>
       <Route path="/use-state-immutable">
         <UseStateImmutable />

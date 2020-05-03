@@ -4,7 +4,7 @@ type Action =
   | { type: 'increment' }
   | { type: 'decrement' }
   | { type: 'reset' }
-  | { type: 'incrementBy'; by: number }
+  | { type: 'incrementBy'; payload: { by: number } }
 
 interface State {
   count: number
@@ -23,7 +23,7 @@ const reducer = (state: State, action: Action): State => {
     case 'reset':
       return initialState
     case 'incrementBy':
-      return { count: state.count + action.by }
+      return { count: state.count + action.payload.by }
   }
 }
 
@@ -37,7 +37,7 @@ export const UseReducerWithOptions: React.FC = () => {
       <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
       <button onClick={() => dispatch({ type: 'increment' })}>+</button>
       <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'incrementBy', by: number })}>By</button>
+      <button onClick={() => dispatch({ type: 'incrementBy', payload: { by: number } })}>By</button>
       <label>
         Increment by given number
         <input
