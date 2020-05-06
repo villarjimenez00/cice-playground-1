@@ -6,6 +6,8 @@ import { positionClicked } from './exercise-4'
 import { positionScrolled } from './exercise-5'
 import { arrayMapFilter } from './exercise-6'
 import { myInterval } from './exercise-7'
+import { scrollClick } from './exercise-8'
+import { yesNo } from './exercise-9'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -66,6 +68,25 @@ myInterval()
     tap(x => {
       const output = document.querySelector('#exercise-7')!
       output.innerHTML += `Value ${x} emitted<br/>`
+    })
+  )
+  .subscribe()
+
+scrollClick()
+  .pipe(
+    tap(scrollPosition => {
+      const output = document.querySelector('#exercise-8')!
+      output.innerHTML += `Scroll Position Y ${scrollPosition}px <br/>`
+    })
+  )
+  .subscribe()
+
+yesNo()
+  .pipe(
+    tap(answer => {
+      const output = document.querySelector('#exercise-9')!
+      output.innerHTML += `Answer is:${answer} <br/>`
+      console.log(answer)
     })
   )
   .subscribe()
