@@ -5,6 +5,7 @@ import { totalTimesClicked } from './exercise-3'
 import { positionClicked } from './exercise-4'
 import { positionScrolled } from './exercise-5'
 import { arrayMapFilter } from './exercise-6'
+import { myInterval } from './exercise-7'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -55,6 +56,15 @@ arrayMapFilter([1, 2, 3, 4, 5])
   .pipe(
     tap(x => {
       const output = document.querySelector('#exercise-6')!
+      output.innerHTML += `Value ${x} emitted<br/>`
+    })
+  )
+  .subscribe()
+
+myInterval()
+  .pipe(
+    tap(x => {
+      const output = document.querySelector('#exercise-7')!
       output.innerHTML += `Value ${x} emitted<br/>`
     })
   )
