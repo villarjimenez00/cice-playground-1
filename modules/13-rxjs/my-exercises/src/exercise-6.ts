@@ -1,10 +1,8 @@
-import { fromEvent } from 'rxjs'
-import { map, throttleTime } from 'rxjs/operators'
+import { from } from 'rxjs'
+import { map, filter } from 'rxjs/operators'
 
-export const positionScrolled = () =>
-  fromEvent(window, 'scroll').pipe(
-    throttleTime(5000),
-    map(() => {
-      return window
-    })
+export const arrayMapFilter = (array: number[]) =>
+  from(array).pipe(
+    map((item: number) => item * 3),
+    filter(item => item % 2 === 0)
   )

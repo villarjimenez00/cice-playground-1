@@ -4,6 +4,7 @@ import { evenNumbers } from './exercise-2'
 import { totalTimesClicked } from './exercise-3'
 import { positionClicked } from './exercise-4'
 import { positionScrolled } from './exercise-5'
+import { arrayMapFilter } from './exercise-6'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -46,6 +47,15 @@ positionScrolled()
     tap(window => {
       const output = document.querySelector('#exercise-5')!
       output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
+    })
+  )
+  .subscribe()
+
+arrayMapFilter([1, 2, 3, 4, 5])
+  .pipe(
+    tap(x => {
+      const output = document.querySelector('#exercise-6')!
+      output.innerHTML += `Value ${x} emitted<br/>`
     })
   )
   .subscribe()
