@@ -30,8 +30,3 @@ totalTimesClicked(document, 'click')
     })
   )
   .subscribe()
-
-// totalTimesClicked(document, 'click').subscribe(count => {
-//   const output = document.querySelector('#exercise-3')!
-//   output.innerHTML = `Clicked document ${count} times<br/>`
-// })
