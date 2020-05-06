@@ -1,5 +1,9 @@
 import { fromEvent } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-export const positionClicked = (document: HTMLElement, event: MouseEvent) =>
-  fromEvent(document, event).pipe(map(value => value))
+export const positionClicked = () =>
+  fromEvent(document, 'click').pipe(
+    map((event: MouseEventInit) => {
+      return { x: event.screenX, y: event.screenY }
+    })
+  )

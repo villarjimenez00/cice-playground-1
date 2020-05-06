@@ -31,11 +31,11 @@ totalTimesClicked(document, 'click')
   )
   .subscribe()
 
-positionClicked(document.body, 'click')
+positionClicked()
   .pipe(
-    tap(value => {
+    tap(mousePosition => {
       const output = document.querySelector('#exercise-4')!
-      output.innerHTML += `Click Position x ${value.clientX} <br/>Click Position y ${value.clientY}<br/>`
+      output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
     })
   )
   .subscribe()
