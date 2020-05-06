@@ -43,10 +43,9 @@ positionClicked()
 
 positionScrolled()
   .pipe(
-    tap(scrollPosition => {
+    tap(window => {
       const output = document.querySelector('#exercise-5')!
-      output.innerHTML += `Scroll Position X ${scrollPosition.scrollX}px <br/>Scroll Position Y ${scrollPosition.scrollY}px<br/>`
-      console.log(scrollPosition)
+      output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
     })
   )
   .subscribe()
