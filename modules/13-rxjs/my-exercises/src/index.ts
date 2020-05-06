@@ -1,8 +1,8 @@
 import { double } from './exercise-1'
-import { tap, scan } from 'rxjs/operators'
+import { tap } from 'rxjs/operators'
 import { pair } from './exercise-2'
 
-import { fromEvent } from 'rxjs'
+import { totalTimesClicked } from './exercise-3'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -22,9 +22,16 @@ pair([1, 2, 3, 4, 5])
   )
   .subscribe()
 
-fromEvent(document, 'click')
-  .pipe(scan(count => count + 1, 0))
-  .subscribe(count => {
-    const output = document.querySelector('#exercise-3')!
-    output.innerHTML = `Clicked document ${count} times<br/>`
-  })
+totalTimesClicked(document, 'click')
+  .pipe(
+    tap(count => {
+      const output = document.querySelector('#exercise-3')!
+      output.innerHTML = `Value ${count} emitted<br/>`
+    })
+  )
+  .subscribe()
+
+// totalTimesClicked(document, 'click').subscribe(count => {
+//   const output = document.querySelector('#exercise-3')!
+//   output.innerHTML = `Clicked document ${count} times<br/>`
+// })
