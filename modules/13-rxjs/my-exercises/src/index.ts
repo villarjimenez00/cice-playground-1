@@ -3,6 +3,7 @@ import { tap } from 'rxjs/operators'
 import { evenNumbers } from './exercise-2'
 import { totalTimesClicked } from './exercise-3'
 import { positionClicked } from './exercise-4'
+import { positionScrolled } from './exercise-5'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -36,6 +37,16 @@ positionClicked()
     tap(mousePosition => {
       const output = document.querySelector('#exercise-4')!
       output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
+    })
+  )
+  .subscribe()
+
+positionScrolled()
+  .pipe(
+    tap(scrollPosition => {
+      const output = document.querySelector('#exercise-5')!
+      output.innerHTML += `Scroll Position X ${scrollPosition.scrollX}px <br/>Scroll Position Y ${scrollPosition.scrollY}px<br/>`
+      console.log(scrollPosition)
     })
   )
   .subscribe()
