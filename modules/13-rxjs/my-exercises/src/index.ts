@@ -1,8 +1,8 @@
 import { double } from './exercise-1'
 import { tap } from 'rxjs/operators'
-import { pair } from './exercise-2'
-
+import { evenNumbers } from './exercise-2'
 import { totalTimesClicked } from './exercise-3'
+import { positionClicked } from './exercise-4'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -13,7 +13,7 @@ double([1, 2, 3, 4, 5])
   )
   .subscribe()
 
-pair([1, 2, 3, 4, 5])
+evenNumbers([1, 2, 3, 4, 5])
   .pipe(
     tap(x => {
       const output = document.querySelector('#exercise-2')!
@@ -26,7 +26,16 @@ totalTimesClicked(document, 'click')
   .pipe(
     tap(count => {
       const output = document.querySelector('#exercise-3')!
-      output.innerHTML = `Value ${count} emitted<br/>`
+      output.innerHTML = `Clicked ${count} times<br/>`
+    })
+  )
+  .subscribe()
+
+positionClicked(document.body, 'click')
+  .pipe(
+    tap(value => {
+      const output = document.querySelector('#exercise-4')!
+      output.innerHTML += `Click Position x ${value.clientX} <br/>Click Position y ${value.clientY}<br/>`
     })
   )
   .subscribe()
