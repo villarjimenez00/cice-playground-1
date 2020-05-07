@@ -9,6 +9,7 @@ import { arrayMapFilter } from './exercise-6'
 import { scrollClick } from './exercise-8'
 import { yesNo } from './exercise-9'
 import { counter, watch, pause, play } from './exercise-12'
+import { yesNoDebounced } from './exercise-10'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -37,23 +38,23 @@ totalTimesClicked(document, 'click')
   )
   .subscribe()
 
-// positionClicked()
-//   .pipe(
-//     tap(mousePosition => {
-//       const output = document.querySelector('#exercise-4')!
-//       output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
-//     })
-//   )
-//   .subscribe()
+positionClicked()
+  .pipe(
+    tap(mousePosition => {
+      const output = document.querySelector('#exercise-4')!
+      output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
+    })
+  )
+  .subscribe()
 
-// positionScrolled()
-//   .pipe(
-//     tap(window => {
-//       const output = document.querySelector('#exercise-5')!
-//       output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
-//     })
-//   )
-//   .subscribe()
+positionScrolled()
+  .pipe(
+    tap(window => {
+      const output = document.querySelector('#exercise-5')!
+      output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
+    })
+  )
+  .subscribe()
 
 arrayMapFilter([1, 2, 3, 4, 5])
   .pipe(
@@ -73,24 +74,34 @@ arrayMapFilter([1, 2, 3, 4, 5])
 //   )
 //   .subscribe()
 
-// scrollClick()
-//   .pipe(
-//     tap(scrollPosition => {
-//       const output = document.querySelector('#exercise-8')!
-//       output.innerHTML += `Scroll Position Y ${scrollPosition}px <br/>`
-//     })
-//   )
-//   .subscribe()
+scrollClick()
+  .pipe(
+    tap(scrollPosition => {
+      const output = document.querySelector('#exercise-8')!
+      output.innerHTML += `Scroll Position Y ${scrollPosition}px <br/>`
+    })
+  )
+  .subscribe()
 
-// yesNo()
-//   .pipe(
-//     tap(answer => {
-//       const output = document.querySelector('#exercise-9')!
-//       output.innerHTML += `Answer is:${answer} <br/>`
-//       console.log(answer)
-//     })
-//   )
-//   .subscribe()
+yesNo()
+  .pipe(
+    tap(answer => {
+      const output = document.querySelector('#exercise-9')!
+      output.innerHTML += `Answer is:${answer} <br/>`
+      console.log(answer)
+    })
+  )
+  .subscribe()
+
+yesNoDebounced()
+  .pipe(
+    tap(answer => {
+      const output = document.querySelector('#exercise-10')!
+      output.innerHTML += `Answer is:${answer} <br/>`
+      console.log(answer)
+    })
+  )
+  .subscribe()
 
 counter()
   .pipe(
