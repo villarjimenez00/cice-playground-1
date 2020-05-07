@@ -5,9 +5,10 @@ import { totalTimesClicked } from './exercise-3'
 import { positionClicked } from './exercise-4'
 import { positionScrolled } from './exercise-5'
 import { arrayMapFilter } from './exercise-6'
-import { myInterval } from './exercise-7'
+//import { myInterval } from './exercise-7'
 import { scrollClick } from './exercise-8'
 import { yesNo } from './exercise-9'
+import { counter, watch, pause, play } from './exercise-12'
 
 double([1, 2, 3, 4, 5])
   .pipe(
@@ -36,23 +37,23 @@ totalTimesClicked(document, 'click')
   )
   .subscribe()
 
-positionClicked()
-  .pipe(
-    tap(mousePosition => {
-      const output = document.querySelector('#exercise-4')!
-      output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
-    })
-  )
-  .subscribe()
+// positionClicked()
+//   .pipe(
+//     tap(mousePosition => {
+//       const output = document.querySelector('#exercise-4')!
+//       output.innerHTML += `Click Position X ${mousePosition.x}px <br/>Click Position Y ${mousePosition.y}px<br/>`
+//     })
+//   )
+//   .subscribe()
 
-positionScrolled()
-  .pipe(
-    tap(window => {
-      const output = document.querySelector('#exercise-5')!
-      output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
-    })
-  )
-  .subscribe()
+// positionScrolled()
+//   .pipe(
+//     tap(window => {
+//       const output = document.querySelector('#exercise-5')!
+//       output.innerHTML += `Scroll Position X ${window.scrollX}px <br/>Scroll Position Y ${window.scrollY}px<br/>`
+//     })
+//   )
+//   .subscribe()
 
 arrayMapFilter([1, 2, 3, 4, 5])
   .pipe(
@@ -63,30 +64,43 @@ arrayMapFilter([1, 2, 3, 4, 5])
   )
   .subscribe()
 
-myInterval()
+// myInterval()
+//   .pipe(
+//     tap(x => {
+//       const output = document.querySelector('#exercise-7')!
+//       output.innerHTML += `Value ${x} emitted<br/>`
+//     })
+//   )
+//   .subscribe()
+
+// scrollClick()
+//   .pipe(
+//     tap(scrollPosition => {
+//       const output = document.querySelector('#exercise-8')!
+//       output.innerHTML += `Scroll Position Y ${scrollPosition}px <br/>`
+//     })
+//   )
+//   .subscribe()
+
+// yesNo()
+//   .pipe(
+//     tap(answer => {
+//       const output = document.querySelector('#exercise-9')!
+//       output.innerHTML += `Answer is:${answer} <br/>`
+//       console.log(answer)
+//     })
+//   )
+//   .subscribe()
+
+counter()
   .pipe(
-    tap(x => {
-      const output = document.querySelector('#exercise-7')!
-      output.innerHTML += `Value ${x} emitted<br/>`
+    tap(value => {
+      const output = document.querySelector('#exercise-12')!
+      output.innerHTML = `value is:${value} <br/>`
     })
   )
   .subscribe()
 
-scrollClick()
-  .pipe(
-    tap(scrollPosition => {
-      const output = document.querySelector('#exercise-8')!
-      output.innerHTML += `Scroll Position Y ${scrollPosition}px <br/>`
-    })
-  )
-  .subscribe()
-
-yesNo()
-  .pipe(
-    tap(answer => {
-      const output = document.querySelector('#exercise-9')!
-      output.innerHTML += `Answer is:${answer} <br/>`
-      console.log(answer)
-    })
-  )
-  .subscribe()
+watch().subscribe()
+pause().subscribe()
+play().subscribe()
