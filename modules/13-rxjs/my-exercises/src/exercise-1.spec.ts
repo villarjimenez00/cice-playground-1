@@ -1,11 +1,26 @@
 import { double } from './exercise-1'
+import { TestScheduler } from 'rxjs/testing'
+import { mergeMapTo } from 'rxjs/operators'
 
 describe('exercise1', () => {
   it('should double a given array', async () => {
-    const given = [1, 2, 3, 4, 5]
+    const testScheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected)
+    })
 
-    const actual = await double(given).toPromise()
+    testScheduler.run(({ expectObservable, cold }) => {
+      const values = {
+        a: 1,
+        x: 2,
+        y: 4,
+        z: 6
+      }
 
-    expect(actual).toEqual(10)
+      const source = '    (a|)'
+      const result = '(x-y-z|)'
+      const actual = cold(source, values).pipe(mergeMapTo(double([1, 2, 3])))
+
+      expectObservable(actual).toBe(result, values)
+    })
   })
 })
